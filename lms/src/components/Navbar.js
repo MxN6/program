@@ -1,18 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Navbar() {
+const Navbar = ({ user, onLogout }) => {
   return (
     <nav>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/register">Register</Link></li>
-        <li><Link to="/dashboard">Dashboard</Link></li>
-        <li><Link to="/profile">Profile</Link></li>
-      </ul>
+      <Link to="/">Home</Link>
+      <Link to="/dashboard">Dashboard</Link>
+      <Link to="/profile">Profile</Link>
+      {user ? (
+        <>
+          <span>Hello, {user}!</span>
+          <button onClick={onLogout}>Logout</button>
+        </>
+      ) : (
+        <>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </>
+      )}
     </nav>
   );
-}
+};
 
 export default Navbar;
