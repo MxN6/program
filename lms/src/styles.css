@@ -5,6 +5,7 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
+    min-height: 100vh;
 }
 
 h1, h2 {
@@ -14,7 +15,7 @@ h1, h2 {
 /* Стили навигационной панели */
 nav {
     background: #0056b3;
-    color: #333;
+    color: #fff;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -36,7 +37,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #333;
     text-decoration: none;
 }
 
