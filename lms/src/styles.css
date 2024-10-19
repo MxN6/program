@@ -14,7 +14,7 @@ h1, h2 {
 /* Стили навигационной панели */
 nav {
     background: #0056b3;
-    color: #fff;
+    color: #333;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
