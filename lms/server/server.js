@@ -7,6 +7,7 @@ const cors = require('cors');
 dotenv.config();
 
 const authRoutes = require('./routes/authRoutes');
+const progressRoutes = require('./routes/progressRoutes');
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(cors());
 
 // Подключение маршрутов
 app.use('/api/auth', authRoutes);
+app.use('/api/progress', progressRoutes);
 
 // Подключение к базе данных MongoDB
 mongoose

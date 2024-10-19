@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
-import Course from './pages/Course';
+import Course from './pages/Course'; // Убедитесь, что этот компонент у вас есть
 import Profile from './pages/Profile';
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         <Route path="/login" render={() => <Login setUser={setUser} />} />
         <Route path="/register" component={Register} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/course/:id" component={Course} />
+        <Route path="/courses/:id" render={(props) => <Course {...props} />} /> 
         <Route path="/profile" component={Profile} />
       </Switch>
       <Footer />

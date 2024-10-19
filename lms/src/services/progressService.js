@@ -7,6 +7,11 @@ export const getProgress = async (userId) => {
   return response.data;
 };
 
+export const addPoints = async (userId, courseId, points) => {
+  const response = await axios.post(`${API_URL}/progress/add`, { userId, courseId, points });
+  return response.data;
+};
+
 export const updateProgress = async (userId, progressData) => {
   const response = await axios.put(`${API_URL}/progress/${userId}`, progressData);
   return response.data;
