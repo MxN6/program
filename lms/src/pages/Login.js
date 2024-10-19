@@ -2,31 +2,42 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const Login = ({ setUser }) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('../controllers/authController', { username, password });
-            setUser(response.data.username);
-            localStorage.setItem('token', response.data.token); // Save token for further requests
-        } catch (error) {
-            console.error(error);
-            alert('Login failed');
-        }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('/api/auth/login', { username, password });
+      setUser(res.data.username);
+      localStorage.setItem('token', res.data.token);
+    } catch (err) {
+      setError('Login failed. Try again.');
+    }
+  };
 
-    return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" required />
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
-                <button type="submit">Login</button>
-            </form>
-        </div>
-    );
+  return (
+    <div>
+      <h2>Login</h2>
+      {error && <p>{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
 };
 
 export default Login;

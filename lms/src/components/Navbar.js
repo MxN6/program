@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ user, onLogout }) => {
+const Navbar = ({ user, setUser }) => {
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem('token');
+  };
+
   return (
     <nav>
       <Link to="/">Home</Link>
@@ -10,7 +15,7 @@ const Navbar = ({ user, onLogout }) => {
       {user ? (
         <>
           <span>Hello, {user}!</span>
-          <button onClick={onLogout}>Logout</button>
+          <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
         <>

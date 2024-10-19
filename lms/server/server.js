@@ -1,23 +1,29 @@
+// server/server.js
 const express = require('express');
-const connectDB = require('./config');
-const authRoutes = require('./routes/authRoutes');
-const courseRoutes = require('./routes/courseRoutes');
-const progressRoutes = require('./routes/progressRoutes');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 dotenv.config();
-connectDB();
+
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
-const port = process.env.PORT || 5000;
-
-app.use(express.json()); // Для парсинга application/json
+app.use(express.json());
+app.use(cors());
 
 // Подключение маршрутов
 app.use('/api/auth', authRoutes);
-app.use('/api/courses', courseRoutes);
-app.use('/api/progress', progressRoutes);
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// Подключение к базе данных MongoDB
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('MongoDB connected'))
+  .catch((error) => console.log('Error connecting to MongoDB:', error));
+
+// Запуск сервера
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
